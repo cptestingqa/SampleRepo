@@ -1,0 +1,154 @@
+package libraries;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+public class SendEmail {
+
+ static String userName;
+ static String password;
+ static List<String> sArraryFun = new ArrayList<>();
+ static String sTotal;
+ static String sPass;
+ static String sFail;
+ static String sServer;
+ static String sBuild;
+ static String sBrowser;
+ 
+ public static void sendEmailWithAttachments()
+ throws AddressException,
+   MessagingException, ParserConfigurationException, SAXException,
+   IOException {
+  String host = "smtp.office365.com";
+  String port = "587";
+  userName = "qpidautomation@qpidhealth.com";
+  password = "Tenx@12345";  
+String toAddress = "mallinath.m@tenxlabs.com";
+//String ccAddress = "anil.j@tenxlabs.com,fathimunnisa.m@tenxlabs.com,jithendar.p@tenxlabs.com,mallinath.m@tenxlabs.com,khasim.shaik@tenxlabs.com";
+//String bccAddress = "nikhila.s@tenxlabs.com,mounica.y@tenxlabs.com";
+    String subject = "Automation test result for Q-Apps"
+    + sArraryFun.toString().replace("[","").replace("]", "")
+      .replace(",", "  ") + "  " + now();
+  String sMessage = "Hi All," + "<br></br>"
+    + "Find the below automation test execution details for " + Global.Functionality + sArraryFun.toString().replace("[", "   ").replace("]", "")
+    .replace(", ", "  ") + "  "
+    + "<br></br>"
+    + "Application URL: "
+    + "\t"
+    + Global.sUrl
+    + "<br>"
+    + "Browser type : "
+    + "\t"
+    + Global.sBrowserType
+    + "<br>"
+    + "Operating System : "
+    + "\t"
+    + Utilities.OSDetector()
+    + "<br></br>"
+    + "Thanks & Regards," 
+    + "<br></br>"
+    + "TenXLabs Technology" + "<br></br>"
+    + "Note: For more information you can download and open the attached zip file. For future reference included old logs as well." 
+    + "<br></br>" ;
+  
+  // attachments
+  File attachFiles = new File("Portal_logs.zip");
+  // sets SMTP server properties
+  Properties properties = new Properties();
+  properties.put("mail.smtp.host", host);
+  properties.put("mail.smtp.port", port);
+  properties.put("mail.smtp.auth", "true");
+  properties.put("mail.smtp.starttls.enable", "true");
+  properties.put("mail.user", userName);
+  properties.put("mail.password", password);
+  
+  // creates a new session with an authenticator
+   Authenticator auth = new Authenticator() {
+   public PasswordAuthentication getPasswordAuthentication() {
+    return new PasswordAuthentication(userName, password);
+   }
+  };
+  Session session = Session.getInstance(properties, auth);
+
+  // creates a new e-mail message
+  Message msg = new MimeMessage(session);
+  msg.setFrom(new InternetAddress(userName));
+  InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
+  msg.setRecipients(Message.RecipientType.TO, toAddresses);
+ //msg.setRecipients(Message.RecipientType.CC,InternetAddress.parse(ccAddress));
+// msg.setRecipients(Message.RecipientType.BCC,InternetAddress.parse(bccAddress));
+ 
+    
+  msg.setSubject(subject);
+  msg.setSentDate(new Date());
+  System.out.println(sMessage);
+  MimeBodyPart messageBodyPart = new MimeBodyPart();
+  messageBodyPart.setContent(sMessage, "text/html");
+  Multipart multipart = new MimeMultipart();
+  //messageBodyPart.setText(sMessage);
+  multipart.addBodyPart(messageBodyPart,0);
+  
+  if (attachFiles != null) {
+   MimeBodyPart attachPart = new MimeBodyPart();
+   String fileName = "Q-Apps log file";
+   DataSource source = new FileDataSource(Global.file);
+   attachPart.setDataHandler(new DataHandler(source));
+   attachPart.setFileName(fileName);
+  
+   try {
+	   attachPart.attachFile(attachFiles);
+    } catch (IOException ex) {
+    	System.out.println("Attachment added sucessfully:");
+    ex.printStackTrace();
+   }
+   multipart.addBodyPart(attachPart, 1);
+     }
+  msg.setContent(multipart);
+  Transport.send(msg);
+ }
+ private static String now() {
+  Calendar cal = Calendar.getInstance();
+  SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+  return sdf.format(cal.getTime());
+ }
+
+// Test sending e-mail with attachments  
+ public static void main(String[] args) {
+  try 
+  {
+   Utilities.zipLogFile();
+   sendEmailWithAttachments();
+   
+   System.out.println("Email has been sent successfully to the registerd id.");
+  } 
+  	catch (Exception ex) 
+  	{
+	  System.out.println("Oops!!Could not send email");
+	  ex.printStackTrace();
+  	}
+ }
+}
