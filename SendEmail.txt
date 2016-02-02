@@ -47,7 +47,7 @@ public class SendEmail {
   String port = "587";
   userName = "qpidautomation@qpidhealth.com";
   password = "Tenx@12345";  
-String toAddress = "mallinath.m@tenxlabs.com";
+String toAddress = "mahendra.p@tenxlabs.com";
 //String ccAddress = "anil.j@tenxlabs.com,fathimunnisa.m@tenxlabs.com,jithendar.p@tenxlabs.com,mallinath.m@tenxlabs.com,khasim.shaik@tenxlabs.com";
 //String bccAddress = "nikhila.s@tenxlabs.com,mounica.y@tenxlabs.com";
     String subject = "Automation test result for Q-Apps"
