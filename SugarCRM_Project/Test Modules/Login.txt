@@ -8,3 +8,4 @@ TestCase01
 
 TestCase02
     Set Test Message    Execution Got Failed
+    Fail
