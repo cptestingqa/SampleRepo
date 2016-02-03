@@ -7,4 +7,4 @@ TestCase01
     Log Many    Browser Name    ${BROWSER}
 
 TestCase02
-    Fail    Execution Got Failed
+    Set Test Message    Execution Got Failed
