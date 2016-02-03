@@ -12,4 +12,6 @@ set projDir=D:\Selenium\automationtests-master\SugarCRM_RobotFramework
 cd %projDir%
 D:
 
+********** Executing Sample Test Cases *****************
+
 call pybot --name SampleReport --variable BROWSER:gc --outputdir D:\TestReports\FFTestRun01 --logtitle SampleJenkingsJobLog --reporttitle SampleJenkingsJobTestReports "Test Modules\Gmail.txt"
