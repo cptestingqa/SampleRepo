@@ -1,0 +1,10 @@
+*** Settings ***
+Resource          ../Keywords/super.txt
+
+*** Test Cases ***
+TestCase01
+    Log    Execution Done
+    Log Many    Browser Name    ${BROWSER}
+
+TestCase02
+    Fail    Execution Got Failed
