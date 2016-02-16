@@ -46,7 +46,7 @@ public class SendEmail {
   String host = "smtp.office365.com";
   String port = "587";
   userName = "qpidautomation@qpidhealth.com";
-  password = "Tenx@12345";  
+  password = "Tenx@12345656556";  
 String toAddress = "mahi@tenxlabs.com";
 //String ccAddress = "anil.j@tenxlabs.com,fathimunnisa.m@tenxlabs.com,jithendar.p@tenxlabs.com,mallinath.m@tenxlabs.com,khasim.shaik@tenxlabs.com";
 //String bccAddress = "nikhila.s@tenxlabs.com,mounica.y@tenxlabs.com";
