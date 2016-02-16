@@ -36,3 +36,21 @@ Menu Select
     Sleep    2s
     ${selectTabStatus}=    Get Element Attribute    //a[contains(text(),'${mainmenuitem}')]/parent::td@class
     Run Keyword If    '${selectTabStatus}'!='currentTab'    Fail    The ${mainmenuitem} Page is Not dispalyed after clicking on the ${mainmenuitem} tab.
+
+SS keyword
+    Log    Suite Setup
+
+ST keyword
+    Log    Suite Teardown
+
+TS Keyword
+    Log    TestSetup
+
+TT keyword
+    Log    Test Teardown
+
+setupKeyword
+    Log    Testcase setup block
+
+tearDownKeyword
+    Log    Testcase teardown block part

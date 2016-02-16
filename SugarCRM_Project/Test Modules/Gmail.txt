@@ -77,3 +77,7 @@ Validate Github Login
     Comment    Login to Application with valid credentials.
     Start Application    https://github.com/
     [Teardown]    Stop Application
+
+SignUp
+    [Tags]    battc
+    Log    Verify Signup process

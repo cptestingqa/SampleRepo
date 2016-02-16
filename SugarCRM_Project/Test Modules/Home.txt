@@ -1,0 +1,18 @@
+*** Settings ***
+Suite Setup       SS keyword
+Suite Teardown    ST keyword
+Test Setup        TS Keyword
+Test Teardown     TT keyword
+Force Tags        Reg
+Default Tags      hs
+Test Timeout      1 second
+Resource          ../Keywords/super.txt
+
+*** Test Cases ***
+TC01
+    [Tags]    battc
+    Log    Home Testsuite --> Test case TC01
+
+TC02
+    [Tags]    battc
+    Log    Home Testsuite --> Test case TC02

@@ -1,11 +1,17 @@
 *** Settings ***
+Default Tags      login
 Resource          ../Keywords/super.txt
 
 *** Test Cases ***
 TestCase01
+    [Tags]    TAG1    TAG2
     Log    Execution Done
     Log Many    Browser Name    ${BROWSER}
 
 TestCase02
+    [Tags]    TAG2    TAG3
     Set Test Message    Execution Got Failed
     Fail
+
+Tc3
+    [Tags]    TAG1

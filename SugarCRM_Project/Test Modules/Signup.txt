@@ -1,0 +1,8 @@
+*** Test Cases ***
+TC03
+    Log    Test Case 03
+
+TC04
+    [Tags]    Tag1    Tag2    Tag3
+    Log    Testcase 04
+    Log Many    @{TEST_TAGS}
