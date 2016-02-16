@@ -8,7 +8,7 @@ ${LOGIN URL}      http://127.0.0.1:8989/sugarcrm/index.php
 ${VALID USERNAME}    admin
 ${VALID PASSWORD}    admin@123
 ${DELAY}          5s
-${INVALID USERNAME}    admin
+${INVALID USERNAME}    admin1233
 ${INVALID PASSWORD}    KPN111
 ${SALUTATION NAME}    Mr.
 ${FIRST NAME}     QA
