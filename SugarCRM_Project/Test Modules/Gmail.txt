@@ -81,3 +81,4 @@ Validate Github Login
 SignUp
     [Tags]    battc
     Log    Verify Signup process
+    Log    New Branch Feb16
